@@ -1,14 +1,12 @@
 // All tags-related publications
 
 import {Meteor} from 'meteor/meteor';
-import {Tags} from '../tags.js';
+import Tag from '../tags.js';
 
 Meteor.publish('tags.all', function() {
-    return Tags.find();
+    return Tag.find();
 });
 
-Meteor.publish('tags.get', function(params) {
-    const {tagId} = params;
-
-    return Tags.find(tagId);
+Meteor.publish('tags.get', function(id) {
+    return Tag.find(id);
 });
