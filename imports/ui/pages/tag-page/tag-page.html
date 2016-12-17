@@ -1,4 +1,23 @@
 <template name="Tag_page">
-  <h2>{{tag.title}}</h2>
-  <p>{{tag.createdAt}}</p>
+  <h1>{{tag.title}}</h1>
+  <h4>Description</h4>
+  <p>{{tag.description}}</p>
+  <h4>Tags</h4>
+  <ul class="tags">
+    {{#each tag.getTags}}
+      <li>
+        <a href="/tags/{{_id}}">
+          <span class="label label-primary">{{title}}</span>
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+  <h4>Links</h4>
+  <div class="links">
+    {{#each tag.getLinks}}
+      {{> link}}
+    {{/each}}
+  </div>
+  <a class="btn btn-default" href="/tags/{{tag._id}}/edit" role="button">Edit</a>
+  <h6>{{tag.createdAt}}</h6>
 </template>

@@ -11,7 +11,7 @@ const Tag = Class.create({
     collection: Tags,
     fields: {
         title: {
-            type: String,
+            type: String
         },
         description: {
             type: String,
@@ -24,7 +24,7 @@ const Tag = Class.create({
             },
         },
         tags: {
-            type: [Mongo.ObjectID],
+            type: [String], // TODO: check why Mongo.ObjectID doesn't work
             default() {
                 return [];
             },
@@ -53,14 +53,23 @@ const Tag = Class.create({
         },
     },
     meteorMethods: {
-        commit() {
+        create() {
             return this.save();
+        },
+        update(fields) {
+            this.set(fields);
+            return this.save();
+        },
+        delete() {
+            return this.remove();
         },
         addTag(tagId) {
             this.tags.push(tagId);
+            return this.save();
         },
         addLink(linkId) {
             this.links.push(linkId);
+            return this.save();
         },
     },
 });

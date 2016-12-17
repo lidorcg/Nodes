@@ -5,7 +5,7 @@ import {Class} from 'meteor/jagi:astronomy';
 import {Enum} from 'meteor/jagi:astronomy';
 import Tag from '../tags/tags';
 
-export const Links = new Mongo.Collection('links');
+const Links = new Mongo.Collection('links');
 
 const media = [
     'Video',
@@ -23,7 +23,7 @@ const content = [
     ...passiveContent,
 ];
 
-const Type = Enum.create({
+export const LinkType = Enum.create({
     name: 'Type',
     identifiers: [
         ...media,
@@ -36,17 +36,17 @@ const Link = Class.create({
     collection: Links,
     fields: {
         title: {
-            type: String,
+            type: String
         },
         description: {
             type: String,
             default: '',
         },
         url: {
-            type: String,
+            type: String
         },
         type: {
-            type: [Type],
+            type: [LinkType],
             default() {
                 return [];
             },
@@ -61,12 +61,19 @@ const Link = Class.create({
     helpers: {
         getTags() {
             return Tag.find({links: this._id});
-        }
+        },
     },
     meteorMethods: {
-        commit() {
+        create() {
             return this.save();
-        }
+        },
+        update(fields) {
+            this.set(fields);
+            return this.save();
+        },
+        delete() {
+            return this.remove();
+        },
     },
 });
 

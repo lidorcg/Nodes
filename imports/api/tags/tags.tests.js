@@ -1,24 +1,23 @@
-// Tests for the behavior of the links collection
+// Tests for the behavior of the tags collection
 //
 // https://guide.meteor.com/testing.html
 
 import { Meteor } from 'meteor/meteor';
 import { assert } from 'meteor/practicalmeteor:chai';
-import Link from './links.js';
+import Tag from './tags.js';
 
 if (Meteor.isServer) {
-  describe('links collection', function () {
+  describe('tags collection', function () {
     it('insert correctly', function () {
-      const newLink = new Link({
-        title: 'meteor homepage',
-        url: 'https://www.meteor.com',
+      const newTag = new Tag({
+        title: 'Meteor',
       });
-      newLink.save();
-      const added = Link.find({ _id: newLink._id });
+      newTag.save(); // TODO: check why .create() doesn't work
+      const added = Tag.find({ _id: newTag._id });
       const collectionName = added._getCollectionName();
       const count = added.count();
 
-      assert.equal(collectionName, 'links');
+      assert.equal(collectionName, 'tags');
       assert.equal(count, 1);
     });
   });

@@ -22,25 +22,25 @@ Template.info.helpers({
 Template.info.events({
     'submit .info-link-add' (event) {
         event.preventDefault();
-
-        const target = event.target;
-        const title = target.title.value;
-        const url = target.url.value;
-
-        let link = new Link();
-        link.title = title;
-        link.url = url;
-        link.commit();
+        const form = event.target;
+        // create link
+        let link = new Link({
+          title: form.title.value,
+          url: form.url.value,
+        }).create();
+        // clean form
+        form.title.value = "";
+        form.url.value = "";
     },
 
     'submit .info-tag-add' (event) {
         event.preventDefault();
-
-        const target = event.target;
-        const title = target.title.value;
-
-        let tag = new Tag();
-        tag.title = title;
-        tag.commit();
+        const form = event.target;
+        // create tag
+        const newTag = new Tag({
+          title: form.title.value,
+        }).create();
+        // clean form
+        form.title.value = "";
     },
 });
