@@ -4,34 +4,26 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 // Import needed templates
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
-import '../../ui/pages/tag-page/tag-page.js';
-import '../../ui/pages/edit-tag-page/edit-tag-page.js';
+import '../../ui/pages/tag/tag.js';
 import '../../ui/pages/not-found/not-found.js';
 
 // Set up all routes in the app
-FlowRouter.route('/tags/:_id/edit', {
-  name: 'Edit.tag.page',
-  action() {
-    BlazeLayout.render('App_body', { main: 'Edit_tag_page' });
-  },
-});
-
 FlowRouter.route('/tags/:_id', {
-  name: 'Tag.page',
+  name: 'Tag',
   action() {
-    BlazeLayout.render('App_body', { main: 'Tag_page' });
+    BlazeLayout.render('Body', { main: 'Tag' });
   },
 });
 
 FlowRouter.route('/', {
-  name: 'App.home',
+  name: 'Home',
   action() {
-    BlazeLayout.render('App_body', { main: 'App_home' });
+    BlazeLayout.render('Body', { main: 'Home' });
   },
 });
 
 FlowRouter.notFound = {
   action() {
-    BlazeLayout.render('App_body', { main: 'App_notFound' });
+    BlazeLayout.render('Body', { main: 'NotFound' });
   },
 };

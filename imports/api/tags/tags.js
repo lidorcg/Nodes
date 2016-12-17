@@ -15,7 +15,7 @@ const Tag = Class.create({
         },
         description: {
             type: String,
-            default: ''
+            default: "No description"
         },
         links: {
             type: [Mongo.ObjectID],

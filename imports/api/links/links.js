@@ -40,7 +40,7 @@ const Link = Class.create({
         },
         description: {
             type: String,
-            default: '',
+            default: "No description",
         },
         url: {
             type: String
