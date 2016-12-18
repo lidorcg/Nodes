@@ -34,7 +34,7 @@
           <li class=""><a href="/tags/{{t._id}}">{{t.title}}</a></li>
         {{/each}}
       </ul>
-      <form class="add-tag">
+      <form class="add-tag form-inline">
         <input class="form-control input-sm" name="title" placeholder="Add new tag.." list="tags" autocomplete="off">
         <datalist id="tags">
           {{#each t in allTags}}
@@ -48,14 +48,18 @@
   <div class="row">
     <div class="col-lg-12">
       <h4>Links</h4>
-      <div class="links">
-        {{#each tag.getLinks}}
-          {{> link}}
+      <ul class="links">
+        {{#each link in tag.getLinks}}
+          <li><a href="{{link.url}}">{{link.title}}</a></li>
         {{/each}}
-      </div>
+      </ul>
+      <form class="add-link form-inline">
+        <input class="form-control input-sm" name="title" placeholder="title" autocomplete="off">
+        <input class="form-control input-sm" name="url" placeholder="url" autocomplete="off">
+        <input class="form-control input-sm" name="description" placeholder="description" autocomplete="off">
+      </form>
     </div>
   </div>
 
-  <a class="btn btn-default" href="/tags/{{tag._id}}/edit" role="button">Edit</a>
   <h6>{{tag.createdAt}}</h6>
 </template>

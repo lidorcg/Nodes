@@ -3,6 +3,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session'
 
 import Tag from '/imports/api/tags/tags.js';
+import Link from '/imports/api/links/links.js';
 
 import './tag.html';
 import '../../components/link/link.js';
@@ -73,22 +74,47 @@ Template.Tag.events({
   },
   'submit .add-tag' (event, instance) {
       event.preventDefault();
-      const tagId = instance.getTagId();
-      let tag = Tag.findOne(tagId);
+      const tag = Tag.findOne(instance.getTagId());
       const form = event.target;
 
-      const newTagTitle = form.title.value;
-      let newTag = Tag.findOne({title: newTagTitle})
+      const newTag = {
+        title: form.title.value,
+      };
 
-      if(newTag) {
-        tag.addTag(newTag._id);
+      const existTag = Tag.findOne({title: newTag.title}) // TODO: better duplication checks
+
+      if(existTag) {
+        tag.addTag(existTag._id);
       } else {
-        let newTagId = new Tag({
-          title: newTagTitle,
-        }).create();
+        const newTagId = new Tag(newTag).create();
         tag.addTag(newTagId);
       }
 
       form.title.value = "";
+  },
+  'submit .add-link' (event, instance) {
+      console.log("adding new link");
+      event.preventDefault();
+      const tag = Tag.findOne(instance.getTagId());
+      const form = event.target;
+
+      const newLink = {
+        title: form.title.value,
+        url: form.url.value.toLowerCase(),
+        description: form.description.value,
+      };
+
+      const existLink = Link.findOne({url: newLink.url}) // TODO: better duplication checks
+
+      if(existLink) {
+        tag.addLink(existLink._id);
+      } else {
+        const newLinkId = new Link(newLink).create();
+        tag.addLink(newTagId);
+      }
+
+      form.title.value = "";
+      form.url.value = "";
+      form.description.value = "";
   },
 });
