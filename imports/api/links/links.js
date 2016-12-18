@@ -4,32 +4,9 @@ import {Mongo} from 'meteor/mongo';
 import {Class} from 'meteor/jagi:astronomy';
 import {Enum} from 'meteor/jagi:astronomy';
 import Tag from '../tags/tags';
+import LinkType from '../link-types/link-types.js';
 
 const Links = new Mongo.Collection('links');
-
-const media = [
-    'Video',
-    'Audio',
-    'Graphic',
-    'Text',
-    'Interactive',
-];
-
-const activeContent = ['Tutorial', 'Practice',];
-const passiveContent = ['Academic', 'Documentation', 'Overview', 'Guide',];
-
-const content = [
-    ...activeContent,
-    ...passiveContent,
-];
-
-export const LinkType = Enum.create({
-    name: 'Type',
-    identifiers: [
-        ...media,
-        ...content,
-    ],
-});
 
 const Link = Class.create({
     name: 'Link',
@@ -45,8 +22,8 @@ const Link = Class.create({
         url: {
             type: String
         },
-        type: {
-            type: [LinkType],
+        types: {
+            type: [String],
             default() {
                 return [];
             },
@@ -62,6 +39,13 @@ const Link = Class.create({
         getTags() {
             return Tag.find({links: this._id});
         },
+        getTypes() {
+          return LinkType.find({
+              _id: {
+                  $in: this.types
+              }
+          })
+        }
     },
     meteorMethods: {
         create() {
@@ -73,6 +57,10 @@ const Link = Class.create({
         },
         delete() {
             return this.remove();
+        },
+        addType(typeId) {
+            this.types.push(typeId);
+            return this.save();
         },
     },
 });

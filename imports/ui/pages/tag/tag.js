@@ -12,6 +12,7 @@ Template.Tag.onCreated(function() {
   this.getTagId = () => FlowRouter.getParam('_id');
   Meteor.subscribe('tags.get', this.getTagId());
   Meteor.subscribe('tags.all');
+  Meteor.subscribe('links.all');
 
   Session.setDefault('editing-title', false);
   Session.setDefault('editing-description', false);
@@ -101,7 +102,7 @@ Template.Tag.events({
       const newLink = {
         title: form.title.value,
         url: form.url.value.toLowerCase(),
-        description: form.description.value,
+        description: form.description.value || null, // TODO: remove null when validate on the model
       };
 
       const existLink = Link.findOne({url: newLink.url}) // TODO: better duplication checks

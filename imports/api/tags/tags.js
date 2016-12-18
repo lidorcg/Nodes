@@ -18,7 +18,7 @@ const Tag = Class.create({
             default: "No description"
         },
         links: {
-            type: [Mongo.ObjectID],
+            type: [String], // TODO: check why Mongo.ObjectID doesn't work
             default() {
                 return [];
             },
