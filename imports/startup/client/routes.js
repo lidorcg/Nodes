@@ -4,6 +4,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 // Import needed templates
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
+import '../../ui/pages/links/links.js';
 import '../../ui/pages/tag/tag.js';
 import '../../ui/pages/not-found/not-found.js';
 
@@ -12,6 +13,13 @@ FlowRouter.route('/tags/:_id', {
   name: 'Tag',
   action() {
     BlazeLayout.render('Body', { main: 'Tag' });
+  },
+});
+
+FlowRouter.route('/links', {
+  name: 'Links',
+  action() {
+    BlazeLayout.render('Body', { main: 'Links' });
   },
 });
 

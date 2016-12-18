@@ -4,15 +4,16 @@ import { Session } from 'meteor/session'
 
 import Tag from '/imports/api/tags/tags.js';
 import Link from '/imports/api/links/links.js';
+import LinkType from '/imports/api/link-types/link-types.js';
 
 import './tag.html';
-import '../../components/link/link.js';
 
 Template.Tag.onCreated(function() {
   this.getTagId = () => FlowRouter.getParam('_id');
   Meteor.subscribe('tags.get', this.getTagId());
   Meteor.subscribe('tags.all');
   Meteor.subscribe('links.all');
+  Meteor.subscribe('link-types.all');
 
   Session.setDefault('editing-title', false);
   Session.setDefault('editing-description', false);
@@ -25,6 +26,9 @@ Template.Tag.helpers({
   },
   allTags() {
     return Tag.find();
+  },
+  allLinkTypes() {
+    return LinkType.find();
   },
   editingTitle() {
     return Session.get('editing-title');

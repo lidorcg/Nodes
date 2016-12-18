@@ -1,4 +1,4 @@
-// All links-related publications
+// All link-types-related publications
 
 import { Meteor } from 'meteor/meteor';
 import LinkType from '../link-types.js';
