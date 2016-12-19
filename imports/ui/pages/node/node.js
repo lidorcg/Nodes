@@ -4,7 +4,7 @@ import { Session } from 'meteor/session'
 
 import Node from '/imports/api/nodes/nodes.js';
 import Link from '/imports/api/links/links.js';
-import LinkType from '/imports/api/link-types/link-types.js';
+import Type from '/imports/api/link-types/link-types.js';
 
 import './node.html';
 
@@ -13,7 +13,7 @@ Template.Node.onCreated(function() {
   Meteor.subscribe('nodes.get', this.getNodeId());
   Meteor.subscribe('nodes.all');
   Meteor.subscribe('links.all');
-  Meteor.subscribe('link-types.all');
+  Meteor.subscribe('types.all');
 
   Session.setDefault('editing-title', false);
   Session.setDefault('editing-description', false);
@@ -28,7 +28,7 @@ Template.Node.helpers({
     return Node.find();
   },
   allLinkTypes() {
-    return LinkType.find();
+    return Type.find();
   },
   editingTitle() {
     return Session.get('editing-title');

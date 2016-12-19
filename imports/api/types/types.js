@@ -1,14 +1,14 @@
-// Definition of the links collection
+// Definition of the types collection
 
 import {Mongo} from 'meteor/mongo';
 import {Class} from 'meteor/jagi:astronomy';
 import Link from '../links/links.js';
 
-const LinkTypes = new Mongo.Collection('link-types');
+const Types = new Mongo.Collection('types');
 
-const LinkType = Class.create({
-    name: 'LinkType',
-    collection: LinkTypes,
+const Type = Class.create({
+    name: 'Type',
+    collection: Types,
     fields: {
         title: {
             type: String
@@ -43,4 +43,4 @@ const LinkType = Class.create({
     },
 });
 
-export default LinkType;
+export default Type;
