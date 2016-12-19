@@ -1,8 +1,8 @@
-<template name="Links">
+<template name="Nodes">
   <div class="page-header">
     <div class="row">
       <div class="col-lg-12">
-        <h1>Links</h1>
+        <h1>Nodes</h1>
       </div>
     </div>
   </div>
@@ -14,14 +14,12 @@
           <tr>
             <th>title</th>
             <th>description</th>
-            <th>url</th>
-            <th>types</th>
             <th>created at</th>
           </tr>
         </thead>
         <tbody>
-          {{#each link in allLinks}}
-            {{> link_entry link=link}}
+          {{#each node in allNodes}}
+            {{> node_entry node=node}}
           {{/each}}
         </tbody>
       </table>
