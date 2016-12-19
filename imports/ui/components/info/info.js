@@ -1,21 +1,21 @@
 import {Meteor} from 'meteor/meteor';
 
 import Link from '/imports/api/links/links.js';
-import Tag from '/imports/api/tags/tags.js';
+import Node from '/imports/api/nodes/nodes.js';
 
 import './info.html';
 
 Template.info.onCreated(function() {
     Meteor.subscribe('links.all');
-    Meteor.subscribe('tags.all');
+    Meteor.subscribe('nodes.all');
 });
 
 Template.info.helpers({
     links() {
         return Link.find({});
     },
-    tags() {
-        return Tag.find({});
+    nodes() {
+        return Node.find({});
     },
 });
 
@@ -33,11 +33,11 @@ Template.info.events({
         form.url.value = "";
     },
 
-    'submit .info-tag-add' (event) {
+    'submit .info-node-add' (event) {
         event.preventDefault();
         const form = event.target;
-        // create tag
-        const newTag = new Tag({
+        // create node
+        const newNode = new Node({
           title: form.title.value,
         }).create();
         // clean form

@@ -1,16 +1,16 @@
 import { Template } from 'meteor/templating';
 
-import Tag from '/imports/api/tags/tags.js';
+import Node from '/imports/api/nodes/nodes.js';
 
 import '../../components/node-entry/node-entry.js';
 import './nodes.html';
 
 Template.Nodes.onCreated(function() {
-  Meteor.subscribe('tags.all');
+  Meteor.subscribe('ndoes.all');
 });
 
 Template.Nodes.helpers({
   allNodes() {
-    return Tag.find();
+    return Node.find();
   },
 });

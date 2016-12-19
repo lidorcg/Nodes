@@ -1,13 +1,13 @@
-<template name="Tag">
+<template name="Node">
   <div class="page-header">
     <div class="row">
       <div class="col-lg-12">
         {{#if editingTitle}}
           <form class="title-form">
-            <input class="title-input form-control input-lg" name="title" placeholder="Title" value="{{tag.title}}">
+            <input class="title-input form-control input-lg" name="title" placeholder="Title" value="{{node.title}}">
           </form>
         {{else}}
-          <h1 class="title">{{tag.title}}</h1>
+          <h1 class="title">{{node.title}}</h1>
         {{/if}}
       </div>
     </div>
@@ -18,10 +18,10 @@
       <h4 class="description">Description</h4>
       {{#if editingDescription}}
         <form class="description-form">
-          <input class="description-input form-control" name="description" placeholder="Description" value="{{tag.description}}">
+          <input class="description-input form-control" name="description" placeholder="Description" value="{{node.description}}">
         </form>
       {{else}}
-        <p class="description">{{tag.description}}</p>
+        <p class="description">{{node.description}}</p>
       {{/if}}
     </div>
   </div>
@@ -30,15 +30,15 @@
     <div class="col-lg-12">
       <h4>Tags</h4>
       <ul class="pager">
-        {{#each t in tag.getTags}}
-          <li class=""><a href="/tags/{{t._id}}">{{t.title}}</a></li>
+        {{#each tag in node.getTags}}
+          <li class=""><a href="/nodes/{{tag._id}}">{{tag.title}}</a></li>
         {{/each}}
       </ul>
       <form class="add-tag form-inline">
         <input class="form-control input-sm" name="title" placeholder="Add new tag.." list="tags" autocomplete="off">
         <datalist id="tags">
-          {{#each t in allTags}}
-            <option value="{{t.title}}"></option>
+          {{#each tag in allNodes}}
+            <option value="{{tag.title}}"></option>
           {{/each}}
         </datalist>
       </form>
@@ -70,5 +70,5 @@
     </div>
   </div>
 
-  <h6>{{tag.createdAt}}</h6>
+  <h6>{{node.createdAt}}</h6>
 </template>

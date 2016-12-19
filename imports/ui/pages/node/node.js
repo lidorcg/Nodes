@@ -2,16 +2,16 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session'
 
-import Tag from '/imports/api/tags/tags.js';
+import Node from '/imports/api/nodes/nodes.js';
 import Link from '/imports/api/links/links.js';
 import LinkType from '/imports/api/link-types/link-types.js';
 
-import './tag.html';
+import './node.html';
 
-Template.Tag.onCreated(function() {
-  this.getTagId = () => FlowRouter.getParam('_id');
-  Meteor.subscribe('tags.get', this.getTagId());
-  Meteor.subscribe('tags.all');
+Template.Node.onCreated(function() {
+  this.getNodeId = () => FlowRouter.getParam('_id');
+  Meteor.subscribe('nodes.get', this.getNodeId());
+  Meteor.subscribe('nodes.all');
   Meteor.subscribe('links.all');
   Meteor.subscribe('link-types.all');
 
@@ -19,13 +19,13 @@ Template.Tag.onCreated(function() {
   Session.setDefault('editing-description', false);
 });
 
-Template.Tag.helpers({
-  tag() {
-    const tagId = Template.instance().getTagId();
-    return Tag.findOne(tagId);
+Template.Node.helpers({
+  node() {
+    const nodeId = Template.instance().getNodeId();
+    return Node.findOne(nodeId);
   },
-  allTags() {
-    return Tag.find();
+  allNodes() {
+    return Node.find();
   },
   allLinkTypes() {
     return LinkType.find();
@@ -38,7 +38,7 @@ Template.Tag.helpers({
   },
 });
 
-Template.Tag.events({
+Template.Node.events({
   'dblclick .title' (event, instance) {
     Session.set('editing-description', false);
     Session.set('editing-title', true);
@@ -55,44 +55,44 @@ Template.Tag.events({
   },
   'submit .title-form' (event, instance) {
       event.preventDefault();
-      const tagId = instance.getTagId();
-      let tag = Tag.findOne(tagId);
+      const nodeId = instance.getNodeId();
+      const node = Node.findOne(nodeId);
       const form = event.target;
 
       const fields = {
         title: form.title.value,
       };
-      tag.update(fields);
+      node.update(fields);
       Session.set('editing-title', false);
   },
   'submit .description-form' (event, instance) {
       event.preventDefault();
-      const tagId = instance.getTagId();
-      let tag = Tag.findOne(tagId);
+      const nodeId = instance.getNodeId();
+      const node = Node.findOne(nodeId);
       const form = event.target;
 
       const fields = {
         description: form.description.value,
       };
-      tag.update(fields);
+      node.update(fields);
       Session.set('editing-description', false);
   },
   'submit .add-tag' (event, instance) {
       event.preventDefault();
-      const tag = Tag.findOne(instance.getTagId());
+      const node = Node.findOne(instance.getNodeId());
       const form = event.target;
 
       const newTag = {
         title: form.title.value,
       };
 
-      const existTag = Tag.findOne({title: newTag.title}) // TODO: better duplication checks
+      const existNode = Node.findOne({title: newTag.title}) // TODO: better duplication checks
 
-      if(existTag) {
-        tag.addTag(existTag._id);
+      if(existNode) {
+        node.addTag(existNode._id);
       } else {
-        const newTagId = new Tag(newTag).create();
-        tag.addTag(newTagId);
+        const newNodeId = new Node(newTag).create();
+        node.addTag(newNodeId);
       }
 
       form.title.value = "";
@@ -100,7 +100,7 @@ Template.Tag.events({
   'submit .add-link' (event, instance) {
       console.log("adding new link");
       event.preventDefault();
-      const tag = Tag.findOne(instance.getTagId());
+      const node = Node.findOne(instance.getNodeId());
       const form = event.target;
 
       const newLink = {
@@ -112,10 +112,10 @@ Template.Tag.events({
       const existLink = Link.findOne({url: newLink.url}) // TODO: better duplication checks
 
       if(existLink) {
-        tag.addLink(existLink._id);
+        node.addLink(existLink._id);
       } else {
         const newLinkId = new Link(newLink).create();
-        tag.addLink(newTagId);
+        node.addLink(newLinkId);
       }
 
       form.title.value = "";

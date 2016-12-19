@@ -3,7 +3,7 @@
 import {Mongo} from 'meteor/mongo';
 import {Class} from 'meteor/jagi:astronomy';
 import {Enum} from 'meteor/jagi:astronomy';
-import Tag from '../tags/tags';
+import Node from '../nodes/nodes.js';
 import LinkType from '../link-types/link-types.js';
 
 const Links = new Mongo.Collection('links');
@@ -37,7 +37,7 @@ const Link = Class.create({
     },
     helpers: {
         getTags() {
-            return Tag.find({links: this._id});
+            return Node.find({links: this._id});
         },
         getTypes() {
           return LinkType.find({

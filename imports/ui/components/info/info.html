@@ -6,18 +6,18 @@
     <input type="submit" name="submit" value="Add new link">
   </form>
   <ul>
-    {{#each links}}
-      <li><a class="text-capitalize" href="{{url}}" target="_blank">{{title}}</a></li>
+    {{#each link in links}}
+      <li><a class="text-capitalize" href="{{link.url}}" target="_blank">{{link.title}}</a></li>
     {{/each}}
   </ul>
-  <h2>Tags</h2>
-  <form class="info-tag-add">
+  <h2>Nodes</h2>
+  <form class="info-node-add">
     <input type="text" name="title" placeholder="Title" required>
-    <input type="submit" name="submit" value="Add new tag">
+    <input type="submit" name="submit" value="Add new node">
   </form>
   <ul>
-    {{#each tags}}
-      <li><a class="text-capitalize" href="/tags/{{_id}}">{{title}}</a></li>
+    {{#each node in nodes}}
+      <li><a class="text-capitalize" href="/nodes/{{node._id}}">{{node.title}}</a></li>
     {{/each}}
   </ul>
 </template>

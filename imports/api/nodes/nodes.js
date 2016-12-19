@@ -1,14 +1,14 @@
-// Definition of the tags collection
+// Definition of the nodes collection
 
 import {Mongo} from 'meteor/mongo';
 import {Class} from 'meteor/jagi:astronomy';
 import Link from '../links/links';
 
-export const Tags = new Mongo.Collection('tags');
+export const Nodes = new Mongo.Collection('tags');
 
-const Tag = Class.create({
-    name: 'Tag',
-    collection: Tags,
+const Node = Class.create({
+    name: 'Node',
+    collection: Nodes,
     fields: {
         title: {
             type: String
@@ -45,7 +45,7 @@ const Tag = Class.create({
             });
         },
         getTags() {
-            return Tag.find({
+            return Node.find({
                 _id: {
                     $in: this.tags
                 }
@@ -63,8 +63,8 @@ const Tag = Class.create({
         delete() {
             return this.remove();
         },
-        addTag(tagId) {
-            this.tags.push(tagId);
+        addTag(nodeId) {
+            this.tags.push(nodeId);
             return this.save();
         },
         addLink(linkId) {
@@ -74,4 +74,4 @@ const Tag = Class.create({
     },
 });
 
-export default Tag;
+export default Node;

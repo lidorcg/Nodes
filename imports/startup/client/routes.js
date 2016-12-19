@@ -6,14 +6,14 @@ import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/links/links.js';
 import '../../ui/pages/nodes/nodes.js';
-import '../../ui/pages/tag/tag.js';
+import '../../ui/pages/node/node.js';
 import '../../ui/pages/not-found/not-found.js';
 
 // Set up all routes in the app
-FlowRouter.route('/tags/:_id', {
-  name: 'Tag',
+FlowRouter.route('/nodes/:_id', {
+  name: 'Node',
   action() {
-    BlazeLayout.render('Body', { main: 'Tag' });
+    BlazeLayout.render('Body', { main: 'Node' });
   },
 });
 
