@@ -1,4 +1,5 @@
 allow-deny@1.0.5
+arillo:flow-router-helpers@0.5.2
 autoupdate@1.2.11
 babel-compiler@6.13.0
 babel-runtime@1.0.1

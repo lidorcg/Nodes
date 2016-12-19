@@ -6,7 +6,7 @@ import '../../components/node-entry/node-entry.js';
 import './nodes.html';
 
 Template.Nodes.onCreated(function() {
-  Meteor.subscribe('ndoes.all');
+  Meteor.subscribe('nodes.all');
 });
 
 Template.Nodes.helpers({
