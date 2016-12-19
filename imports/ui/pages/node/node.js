@@ -4,7 +4,7 @@ import { Session } from 'meteor/session'
 
 import Node from '/imports/api/nodes/nodes.js';
 import Link from '/imports/api/links/links.js';
-import Type from '/imports/api/link-types/link-types.js';
+import Type from '/imports/api/types/types.js';
 
 import './node.html';
 
@@ -105,8 +105,8 @@ Template.Node.events({
 
       const newLink = {
         title: form.title.value,
+        description: form.description.value,
         url: form.url.value.toLowerCase(),
-        description: form.description.value || null, // TODO: remove null when validate on the model
       };
 
       const existLink = Link.findOne({url: newLink.url}) // TODO: better duplication checks

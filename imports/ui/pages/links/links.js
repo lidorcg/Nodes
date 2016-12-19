@@ -19,3 +19,28 @@ Template.Links.helpers({
     return Type.find();
   },
 });
+
+Template.Links.events({
+  'submit .new-link' (event) {
+      event.preventDefault();
+      const form = event.target;
+
+      const newLink = {
+        title: form.title.value,
+        description: form.description.value,
+        url: form.url.value.toLowerCase(),
+      };
+
+      const existLink = Link.findOne({url: newLink.url}) // TODO: better duplication checks
+
+      if(existLink) {
+        // TODO: alert something?
+      } else {
+        const newLinkId = new Link(newLink).create();
+      }
+
+      form.title.value = "";
+      form.description.value = "";
+      form.url.value = "";
+  },
+});

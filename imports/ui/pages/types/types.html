@@ -1,28 +1,27 @@
-<template name="Nodes">
+<template name="Types">
   <div class="page-header">
     <div class="row">
       <div class="col-lg-12">
-        <h1>Nodes</h1>
+        <h1>Types</h1>
       </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-lg-12">
-      <form class="new-node form-inline">
+      <form class="new-type form-inline">
         <input class="form-control input-sm" name="title" placeholder="title" autocomplete="off">
         <input class="form-control input-sm" name="description" placeholder="description" autocomplete="off">
-        <button type="submit" class="btn btn-primary btn-sm">Add node</button>
+        <button type="submit" class="btn btn-primary btn-sm">Add type</button>
       </form>
     </div>
   </div>
 
   <div class="row">
     <div class="col-lg-12">
-      <table class="table table-hover table-striped">
+      <table class="table table-hover table-striped table-bordered">
         <thead>
           <tr>
-            <th class="col-lg-1"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></th>
             <th>Title</th>
             <th>Description</th>
             <th>Created at</th>
@@ -30,8 +29,8 @@
           </tr>
         </thead>
         <tbody>
-          {{#each node in allNodes}}
-            {{> node_entry node=node}}
+          {{#each type in allTypes}}
+            {{> type_entry type=type}}
           {{/each}}
         </tbody>
       </table>

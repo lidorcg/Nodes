@@ -4,7 +4,7 @@ import {Mongo} from 'meteor/mongo';
 import {Class} from 'meteor/jagi:astronomy';
 import {Enum} from 'meteor/jagi:astronomy';
 import Node from '../nodes/nodes.js';
-import Type from '../link-types/link-types.js';
+import Type from '../types/types.js';
 
 const Links = new Mongo.Collection('links');
 
