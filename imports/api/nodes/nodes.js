@@ -4,7 +4,7 @@ import {Mongo} from 'meteor/mongo';
 import {Class} from 'meteor/jagi:astronomy';
 import Link from '../links/links';
 
-export const Nodes = new Mongo.Collection('tags');
+export const Nodes = new Mongo.Collection('nodes');
 
 const Node = Class.create({
     name: 'Node',
