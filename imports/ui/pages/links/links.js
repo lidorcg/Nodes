@@ -3,12 +3,17 @@ import { Template } from 'meteor/templating';
 import Link from '/imports/api/links/links.js';
 import Type from '/imports/api/types/types.js';
 
+import '../../components/selectable/selectable.js';
 import '../../components/editable/editable.js';
 import './links.html';
 
 Template.Links.onCreated(function() {
   Meteor.subscribe('links.all');
   Meteor.subscribe('types.all');
+  this.state = new ReactiveDict();
+  this.state.setDefault({
+    selected: [],
+  });
 });
 
 Template.Links.helpers({
@@ -17,6 +22,23 @@ Template.Links.helpers({
   },
   allTypes() {
     return Type.find();
+  },
+  onSelect(id) {
+    const state = Template.instance().state;
+    // it seems that the template make two function-applys
+    // so I wrapped the actual function with a lambda
+    return (() => (isSelected) => {
+      let selected = state.get('selected');
+      if(isSelected) {
+        selected.push(id);
+      } else {
+        const i = selected.indexOf(id);
+        if (i > -1) {
+          selected.splice(i, 1);
+        }
+      }
+      state.set('selected', selected);
+    });
   },
 });
 

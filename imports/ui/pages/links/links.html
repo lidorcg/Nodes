@@ -34,9 +34,7 @@
         <tbody>
           {{#each link in allLinks}}
             <tr>
-              <td>
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-              </td>
+              {{> selectable onSelect=(onSelect link._id)}}
               {{> editable item=link name="title" value=link.title}}
               {{> editable item=link name="description" value=link.description}}
               {{> editable item=link name="url" value=link.url}}

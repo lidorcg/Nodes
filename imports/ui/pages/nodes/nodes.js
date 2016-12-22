@@ -2,16 +2,38 @@ import { Template } from 'meteor/templating';
 
 import Node from '/imports/api/nodes/nodes.js';
 
+import '../../components/selectable/selectable.js';
 import '../../components/editable/editable.js';
 import './nodes.html';
 
 Template.Nodes.onCreated(function() {
   Meteor.subscribe('nodes.all');
+  this.state = new ReactiveDict();
+  this.state.setDefault({
+    selected: [],
+  });
 });
 
 Template.Nodes.helpers({
   allNodes() {
     return Node.find();
+  },
+  onSelect(id) {
+    const state = Template.instance().state;
+    // it seems that the template make two function-applys
+    // so I wrapped the actual function with a lambda
+    return (() => (isSelected) => {
+      let selected = state.get('selected');
+      if(isSelected) {
+        selected.push(id);
+      } else {
+        const i = selected.indexOf(id);
+        if (i > -1) {
+          selected.splice(i, 1);
+        }
+      }
+      state.set('selected', selected);
+    });
   },
 });
 

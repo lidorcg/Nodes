@@ -17,7 +17,7 @@ Template.editable.helpers({
     const state = Template.instance().state
     return () => {
       state.set('editing', false);
-    }
+    };
   }
 });
 

@@ -32,9 +32,7 @@
         <tbody>
           {{#each node in allNodes}}
             <tr>
-              <td>
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-              </td>
+              {{> selectable onSelect=(onSelect node._id)}}
               {{> editable item=node name="title" value=node.title}}
               {{> editable item=node name="description" value=node.description}}
               <td>{{node.createdAt.toLocaleString}}</td>
