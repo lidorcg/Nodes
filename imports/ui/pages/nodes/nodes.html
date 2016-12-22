@@ -22,16 +22,28 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th class="col-lg-1"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></th>
+            <th><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
             <th>Title</th>
             <th>Description</th>
-            <th>Created at</th>
-            <th class="col-lg-1">Remove</th>
+            <th class="col-lg-2">Created at</th>
+            <th><span class="glyphicon glyphicon-link" aria-hidden="true"></span></th>
           </tr>
         </thead>
         <tbody>
           {{#each node in allNodes}}
-            {{> node_entry node=node}}
+            <tr>
+              <td>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+              </td>
+              {{> editable item=node name="title" value=node.title}}
+              {{> editable item=node name="description" value=node.description}}
+              <td>{{node.createdAt.toLocaleString}}</td>
+              <td>
+                <a href="{{pathFor 'Node' _id=node._id}}">
+                  <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                </a>
+              </td>
+            </tr>
           {{/each}}
         </tbody>
       </table>

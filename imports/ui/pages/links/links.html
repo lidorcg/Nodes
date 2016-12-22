@@ -23,17 +23,30 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
+            <th><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
             <th>Title</th>
             <th>Description</th>
             <th>Url</th>
             <th>Type</th>
-            <th>Created at</th>
-            <th class="col-lg-1">Remove</th>
+            <th class="col-lg-2">Created at</th>
           </tr>
         </thead>
         <tbody>
           {{#each link in allLinks}}
-            {{> link_entry link=link}}
+            <tr>
+              <td>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+              </td>
+              {{> editable item=link name="title" value=link.title}}
+              {{> editable item=link name="description" value=link.description}}
+              {{> editable item=link name="url" value=link.url}}
+              <td>
+                {{#each type in link.getTypes}}
+                  <span class="label label-primary">{{type.title}}</span>
+                {{/each}}
+              </td>
+              <td>{{link.createdAt.toLocaleString}}</td>
+            </tr>
           {{/each}}
         </tbody>
       </table>

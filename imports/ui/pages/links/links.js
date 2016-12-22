@@ -3,7 +3,7 @@ import { Template } from 'meteor/templating';
 import Link from '/imports/api/links/links.js';
 import Type from '/imports/api/types/types.js';
 
-import '../../components/link-entry/link-entry.js';
+import '../../components/editable/editable.js';
 import './links.html';
 
 Template.Links.onCreated(function() {
