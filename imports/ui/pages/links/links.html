@@ -45,9 +45,15 @@
           {{#each itm in allLinks}}
             <tr>
               {{> selectable onSelect=(onSelect itm)}}
-              {{> editable item=itm name="title" value=itm.title}}
-              {{> editable item=itm name="description" value=itm.description}}
-              {{> editable item=itm name="url" value=itm.url}}
+              {{# editable item=itm name="title" value=itm.title}}
+                {{> text_input}}
+              {{/ editable}}
+              {{# editable item=itm name="description" value=itm.description}}
+                {{> text_input}}
+              {{/ editable}}
+              {{# editable item=itm name="url" value=itm.url}}
+                {{> text_input}}
+              {{/ editable}}
               <td>
                 {{#each type in itm.getTypes}}
                   <span class="label label-primary">{{type.title}}</span>

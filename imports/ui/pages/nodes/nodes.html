@@ -43,8 +43,12 @@
           {{#each itm in allNodes}}
             <tr>
               {{> selectable onSelect=(onSelect itm)}}
-              {{> editable item=itm name="title" value=itm.title}}
-              {{> editable item=itm name="description" value=itm.description}}
+              {{# editable item=itm name="title" value=itm.title}}
+                {{> text_input}}
+              {{/ editable}}
+              {{# editable item=itm name="description" value=itm.description}}
+                {{> text_input}}
+              {{/ editable}}
               <td>{{itm.createdAt.toLocaleString}}</td>
               <td>
                 <a href="{{pathFor 'Node' _id=itm._id}}">

@@ -26,21 +26,3 @@ Template.editable.events({
     instance.state.set('editing', true);
   },
 });
-
-Template.editable_form.events({
-  'submit form' (event) {
-    event.preventDefault();
-    data = Template.currentData();
-    let fields = {};
-    fields[data.name] = event.target.input.value;
-    data.item.update(fields);
-    this.doneEditing();
-  },
-  'blur input' () {
-    this.doneEditing();
-  },
-});
-
-Template.editable_form.onRendered(function() {
-  Template.instance().$('input').focus();
-});

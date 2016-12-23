@@ -4,6 +4,7 @@ import Node from '/imports/api/nodes/nodes.js';
 
 import '../../components/selectable/selectable.js';
 import '../../components/editable/editable.js';
+import '../../components/text-input/text-input.js';
 import './nodes.html';
 
 Template.Nodes.onCreated(function() {

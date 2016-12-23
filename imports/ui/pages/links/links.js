@@ -5,6 +5,7 @@ import Type from '/imports/api/types/types.js';
 
 import '../../components/selectable/selectable.js';
 import '../../components/editable/editable.js';
+import '../../components/text-input/text-input.js';
 import './links.html';
 
 Template.Links.onCreated(function() {

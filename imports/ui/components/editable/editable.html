@@ -1,15 +1,9 @@
 <template name="editable">
   <td class="editable">
     {{#if editing}}
-      {{> editable_form item=item name=name value=value doneEditing=onDoneEditing}}
+      {{> Template.contentBlock item=item name=name value=value doneEditing=onDoneEditing}}
     {{else}}
       {{value}}
     {{/if}}
   </td>
-</template>
-
-<template name="editable_form">
-  <form class="form-inline">
-    <input class="form-control input-sm" name="input" placeholder="{{name}}" value="{{value}}">
-  </form>
 </template>

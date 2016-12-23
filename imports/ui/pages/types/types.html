@@ -42,8 +42,12 @@
           {{#each item in allTypes}}
             <tr>
               {{> selectable onSelect=(onSelect item)}}
-              {{> editable item=item name="title" value=item.title}}
-              {{> editable item=item name="description" value=item.description}}
+              {{# editable item=item name="title" value=item.title}}
+                {{> text_input}}
+              {{/ editable}}
+              {{# editable item=item name="description" value=item.description}}
+                {{> text_input}}
+              {{/ editable}}
               <td>{{item.createdAt.toLocaleString}}</td>
             </tr>
           {{/each}}
