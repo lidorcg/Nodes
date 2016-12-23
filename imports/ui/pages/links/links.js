@@ -8,8 +8,10 @@ import '../../components/editable/editable.js';
 import './links.html';
 
 Template.Links.onCreated(function() {
+  // subscriptions
   Meteor.subscribe('links.all');
   Meteor.subscribe('types.all');
+  // state
   this.state = new ReactiveDict();
   this.state.setDefault({
     selected: [],
@@ -23,46 +25,63 @@ Template.Links.helpers({
   allTypes() {
     return Type.find();
   },
-  onSelect(id) {
+  hasSelected() {
+    return Template.instance().state.get('selected').length > 0;
+  },
+  onSelect(item) {
     const state = Template.instance().state;
     // it seems that the template make two function-applys
     // so I wrapped the actual function with a lambda
     return (() => (isSelected) => {
-      let selected = state.get('selected');
+      const currentSelected = state.get('selected');
       if(isSelected) {
-        selected.push(id);
+        updatedSelected = [...currentSelected, item];
       } else {
-        const i = selected.indexOf(id);
-        if (i > -1) {
-          selected.splice(i, 1);
-        }
+        updatedSelected = currentSelected.filter(itm => itm._id !== item._id);
       }
-      state.set('selected', selected);
+      state.set('selected', updatedSelected);
     });
   },
 });
 
 Template.Links.events({
-  'submit .new-link' (event) {
+  'submit .new-item' (event) {
       event.preventDefault();
       const form = event.target;
 
-      const newLink = {
+      const newItem = {
         title: form.title.value,
         description: form.description.value,
         url: form.url.value.toLowerCase(),
       };
 
-      const existLink = Link.findOne({url: newLink.url}) // TODO: better duplication checks
+      const existItem = Link.findOne({url: newItem.url}) // TODO: better duplication checks
 
-      if(existLink) {
+      if(existItem) {
         // TODO: alert something?
       } else {
-        const newLinkId = new Link(newLink).create();
+        const newItemId = new Link(newItem).create();
       }
 
       form.title.value = "";
       form.description.value = "";
       form.url.value = "";
+  },
+  'submit .action' (event, instance) {
+      event.preventDefault();
+      const action = event.target.action.value;
+      const selected = instance.state.get('selected');
+
+      const updatedSelected = selected.filter(itm => {
+        switch(action) {
+          case "REMOVE":
+              itm.delete();
+              return false;
+          default:
+              return true;
+        }
+      });
+
+      instance.state.set('selected', updatedSelected);
   },
 });

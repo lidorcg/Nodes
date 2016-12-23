@@ -8,13 +8,23 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-12">
-      <form class="new-node form-inline">
+    <div class="col-lg-10">
+      <form class="new-item form-inline">
         <input class="form-control input-sm" name="title" placeholder="title" autocomplete="off">
         <input class="form-control input-sm" name="description" placeholder="description" autocomplete="off">
         <button type="submit" class="btn btn-primary btn-sm">Add node</button>
       </form>
     </div>
+    {{#if hasSelected}}
+    <div class="col-lg-2 pull-right">
+      <form class="action form-inline">
+        <select class="form-control input-sm" name="action">
+          <option value="REMOVE">Remove</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+      </form>
+    </div>
+    {{/if}}
   </div>
 
   <div class="row">
@@ -30,14 +40,14 @@
           </tr>
         </thead>
         <tbody>
-          {{#each node in allNodes}}
+          {{#each itm in allNodes}}
             <tr>
-              {{> selectable onSelect=(onSelect node._id)}}
-              {{> editable item=node name="title" value=node.title}}
-              {{> editable item=node name="description" value=node.description}}
-              <td>{{node.createdAt.toLocaleString}}</td>
+              {{> selectable onSelect=(onSelect itm)}}
+              {{> editable item=itm name="title" value=itm.title}}
+              {{> editable item=itm name="description" value=itm.description}}
+              <td>{{itm.createdAt.toLocaleString}}</td>
               <td>
-                <a href="{{pathFor 'Node' _id=node._id}}">
+                <a href="{{pathFor 'Node' _id=itm._id}}">
                   <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
                 </a>
               </td>
