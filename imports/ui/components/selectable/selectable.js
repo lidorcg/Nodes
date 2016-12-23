@@ -11,7 +11,7 @@ Template.selectable.onCreated(function() {
 
 Template.selectable.helpers({
   isSelected() {
-    return Template.instance().state.get('selected') ? "selected" : "";
+    return Template.instance().state.get('selected') ? "text-success" : "";
   },
 });
 
