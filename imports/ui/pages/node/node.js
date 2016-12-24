@@ -6,6 +6,8 @@ import Node from '/imports/api/nodes/nodes.js';
 import Link from '/imports/api/links/links.js';
 import Type from '/imports/api/types/types.js';
 
+import '../../components/editable/editable.js';
+
 import './node.html';
 
 Template.Node.onCreated(function() {
@@ -14,9 +16,6 @@ Template.Node.onCreated(function() {
   Meteor.subscribe('nodes.all');
   Meteor.subscribe('links.all');
   Meteor.subscribe('types.all');
-
-  Session.setDefault('editing-title', false);
-  Session.setDefault('editing-description', false);
 });
 
 Template.Node.helpers({
@@ -30,52 +29,20 @@ Template.Node.helpers({
   allLinkTypes() {
     return Type.find();
   },
-  editingTitle() {
-    return Session.get('editing-title');
-  },
-  editingDescription() {
-    return Session.get('editing-description');
-  },
 });
 
 Template.Node.events({
   'dblclick .title' (event, instance) {
-    Session.set('editing-description', false);
-    Session.set('editing-title', true);
+    this.editing();
   },
   'blur .title-input' (event) {
-    Session.set('editing-title', false);
+    this.doneEditing();
   },
   'dblclick .description' (event, instance) {
-    Session.set('editing-title', false);
-    Session.set('editing-description', true);
+    this.editing();
   },
   'blur .description-input' (event) {
-    Session.set('editing-description', false);
-  },
-  'submit .title-form' (event, instance) {
-      event.preventDefault();
-      const nodeId = instance.getNodeId();
-      const node = Node.findOne(nodeId);
-      const form = event.target;
-
-      const fields = {
-        title: form.title.value,
-      };
-      node.update(fields);
-      Session.set('editing-title', false);
-  },
-  'submit .description-form' (event, instance) {
-      event.preventDefault();
-      const nodeId = instance.getNodeId();
-      const node = Node.findOne(nodeId);
-      const form = event.target;
-
-      const fields = {
-        description: form.description.value,
-      };
-      node.update(fields);
-      Session.set('editing-description', false);
+    this.doneEditing();
   },
   'submit .add-tag' (event, instance) {
       event.preventDefault();

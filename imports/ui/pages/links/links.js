@@ -7,6 +7,7 @@ import '../../components/selectable/selectable.js';
 import '../../components/editable-td/editable-td.js';
 import '../../components/text-input/text-input.js';
 import '../../components/type-form/type-form.js';
+
 import './links.html';
 
 Template.Links.onCreated(function() {
