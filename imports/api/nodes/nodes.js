@@ -35,6 +35,13 @@ const Node = Class.create({
                 return new Date();
             },
         },
+
+        lastUpdated: {
+            type: Date,
+            default() {
+                return new Date();
+            },
+        },
     },
     helpers: {
         getLinks() {
@@ -58,6 +65,7 @@ const Node = Class.create({
         },
         update(fields) {
             this.set(fields);
+            this.lastUpdated = new Date();
             return this.save();
         },
         delete() {
@@ -65,10 +73,12 @@ const Node = Class.create({
         },
         addTag(nodeId) {
             this.tags.push(nodeId);
+            this.lastUpdated = new Date();
             return this.save();
         },
         addLink(linkId) {
             this.links.push(linkId);
+            this.lastUpdated = new Date();
             return this.save();
         },
     },

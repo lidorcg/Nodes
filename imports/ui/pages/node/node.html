@@ -65,6 +65,8 @@
       </form>
     </div>
   </div>
-
-  <h6>{{node.createdAt}}</h6>
+  <hr>
+  <footer>
+    <h6>Created at: {{node.createdAt.toLocaleString}}, Last updated: {{node.lastUpdated.toLocaleString}}</h6>
+  </footer>
 </template>
