@@ -35,20 +35,29 @@
             <th><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
             <th>Title</th>
             <th>Description</th>
-            <th>Created at</th>
+            <th class="col-lg-2">Created at</th>
           </tr>
         </thead>
         <tbody>
-          {{#each item in allTypes}}
+          {{#each itm in allTypes}}
             <tr>
-              {{> selectable onSelect=(onSelect item)}}
-              {{# editable item=item name="title" value=item.title}}
+              <td>
+                {{> selectable onSelect=(onSelect itm)}}
+              </td>
+
+              {{# editable_td item=itm name="title" value=itm.title}}
                 {{> text_input}}
-              {{/ editable}}
-              {{# editable item=item name="description" value=item.description}}
+              {{else}}
+                {{itm.title}}
+              {{/ editable_td}}
+
+              {{# editable_td item=itm name="description" value=itm.description}}
                 {{> text_input}}
-              {{/ editable}}
-              <td>{{item.createdAt.toLocaleString}}</td>
+              {{else}}
+                {{itm.description}}
+              {{/ editable_td}}
+
+              <td>{{itm.createdAt.toLocaleString}}</td>
             </tr>
           {{/each}}
         </tbody>

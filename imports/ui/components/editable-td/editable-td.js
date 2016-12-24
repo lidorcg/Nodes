@@ -1,15 +1,15 @@
 import { Template } from 'meteor/templating';
 
-import './editable.html';
+import './editable-td.html';
 
-Template.editable.onCreated(function() {
+Template.editable_td.onCreated(function() {
   this.state = new ReactiveDict();
   this.state.setDefault({
     editing: false,
   });
 });
 
-Template.editable.helpers({
+Template.editable_td.helpers({
   editing() {
     return Template.instance().state.get('editing');
   },
@@ -21,7 +21,7 @@ Template.editable.helpers({
   }
 });
 
-Template.editable.events({
+Template.editable_td.events({
   'dblclick .editable' (event, instance) {
     instance.state.set('editing', true);
   },

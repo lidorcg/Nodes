@@ -4,7 +4,7 @@ import Link from '/imports/api/links/links.js';
 import Type from '/imports/api/types/types.js';
 
 import '../../components/selectable/selectable.js';
-import '../../components/editable/editable.js';
+import '../../components/editable-td/editable-td.js';
 import '../../components/text-input/text-input.js';
 import './links.html';
 

@@ -3,7 +3,7 @@ import { Template } from 'meteor/templating';
 import Node from '/imports/api/nodes/nodes.js';
 
 import '../../components/selectable/selectable.js';
-import '../../components/editable/editable.js';
+import '../../components/editable-td/editable-td.js';
 import '../../components/text-input/text-input.js';
 import './nodes.html';
 

@@ -1,9 +1,9 @@
-<template name="editable">
+<template name="editable_td">
   <td class="editable">
     {{#if editing}}
       {{> Template.contentBlock item=item name=name value=value doneEditing=onDoneEditing}}
     {{else}}
-      {{value}}
+      {{> Template.elseBlock}}
     {{/if}}
   </td>
 </template>

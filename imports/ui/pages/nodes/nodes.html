@@ -42,14 +42,24 @@
         <tbody>
           {{#each itm in allNodes}}
             <tr>
-              {{> selectable onSelect=(onSelect itm)}}
-              {{# editable item=itm name="title" value=itm.title}}
+              <td>
+                {{> selectable onSelect=(onSelect itm)}}
+              </td>
+
+              {{# editable_td item=itm name="title" value=itm.title}}
                 {{> text_input}}
-              {{/ editable}}
-              {{# editable item=itm name="description" value=itm.description}}
+              {{else}}
+                {{itm.title}}
+              {{/ editable_td}}
+
+              {{# editable_td item=itm name="description" value=itm.description}}
                 {{> text_input}}
-              {{/ editable}}
+              {{else}}
+                {{itm.description}}
+              {{/ editable_td}}
+
               <td>{{itm.createdAt.toLocaleString}}</td>
+
               <td>
                 <a href="{{pathFor 'Node' _id=itm._id}}">
                   <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
