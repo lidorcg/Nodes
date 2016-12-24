@@ -80,7 +80,7 @@ const Node = Class.create({
             this.tags = this.tags.filter(i => i != id);
             this.lastUpdated = new Date();
             return this.save();
-        }
+        },
         addLink(id) {
             this.links = [...this.links, id];
             this.lastUpdated = new Date();
@@ -90,7 +90,7 @@ const Node = Class.create({
             this.links = this.links.filter(i => i != id);
             this.lastUpdated = new Date();
             return this.save();
-        }
+        },
     },
 });
 

@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Session } from 'meteor/session'
 
 import Node from '/imports/api/nodes/nodes.js';
 import Link from '/imports/api/links/links.js';
@@ -49,17 +48,26 @@ Template.Node.events({
       const node = Node.findOne(instance.getNodeId());
       const form = event.target;
 
-      const newTag = {
+      let tagId = '';
+
+      // get or create node on db
+      const newNode = {
         title: form.title.value,
       };
-
-      const existNode = Node.findOne({title: newTag.title}) // TODO: better duplication checks
-
+      const existNode = Node.findOne({title: newNode.title}); // TODO: better duplication checks
       if(existNode) {
-        node.addTag(existNode._id);
+        tagId = existNode._id;
       } else {
-        const newNodeId = new Node(newTag).create();
-        node.addTag(newNodeId);
+        tagId = new Node(newNode).create();
+      }
+
+      // toggle tag on current node
+      const isTagged = node.getTags().map(t => t._id == tagId).reduce((acc, x) => acc || x, false);
+      if(isTagged) {
+        node.removeTag(tagId);
+      } else {
+        console.log("add tag");
+        node.addTag(tagId);
       }
 
       form.title.value = "";

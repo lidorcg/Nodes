@@ -31,7 +31,7 @@
         {{/each}}
       </ul>
       <form class="js-add-tag form-inline">
-        <input class="form-control input-sm" name="title" placeholder="Add new tag.." list="tags" autocomplete="off">
+        <input class="form-control input-sm" name="title" placeholder="Toggle tags" list="tags" autocomplete="off">
         <datalist id="tags">
           {{#each tag in allNodes}}
             <option value="{{tag.title}}"></option>
