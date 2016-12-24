@@ -9,7 +9,7 @@
 
   <div class="row">
     <div class="col-lg-10">
-      <form class="new-item form-inline">
+      <form class="js-new-item form-inline">
         <input class="form-control input-sm" name="title" placeholder="title" autocomplete="off">
         <input class="form-control input-sm" name="description" placeholder="description" autocomplete="off">
         <input class="form-control input-sm" name="url" placeholder="url" autocomplete="off">
@@ -18,7 +18,7 @@
     </div>
     {{#if hasSelected}}
     <div class="col-lg-2 pull-right">
-      <form class="action form-inline">
+      <form class="js-action form-inline">
         <select class="form-control input-sm" name="action">
           <option value="REMOVE">Remove</option>
         </select>
@@ -66,11 +66,14 @@
                 {{itm.url}}
               {{/ editable_td}}
 
-              <td>
+              {{# editable_td item=itm name="type" value=""}}
+                {{> type_form}}
+              {{else}}
                 {{#each type in itm.getTypes}}
                   <span class="label label-primary">{{type.title}}</span>
                 {{/each}}
-              </td>
+              {{/ editable_td}}
+              
               <td>{{itm.createdAt.toLocaleString}}</td>
             </tr>
           {{/each}}

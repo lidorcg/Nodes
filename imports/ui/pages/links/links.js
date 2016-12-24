@@ -6,6 +6,7 @@ import Type from '/imports/api/types/types.js';
 import '../../components/selectable/selectable.js';
 import '../../components/editable-td/editable-td.js';
 import '../../components/text-input/text-input.js';
+import '../../components/type-form/type-form.js';
 import './links.html';
 
 Template.Links.onCreated(function() {
@@ -46,7 +47,7 @@ Template.Links.helpers({
 });
 
 Template.Links.events({
-  'submit .new-item' (event) {
+  'submit .js-new-item' (event) {
       event.preventDefault();
       const form = event.target;
 
@@ -68,7 +69,7 @@ Template.Links.events({
       form.description.value = "";
       form.url.value = "";
   },
-  'submit .action' (event, instance) {
+  'submit .js-action' (event, instance) {
       event.preventDefault();
       const action = event.target.action.value;
       const selected = instance.state.get('selected');
