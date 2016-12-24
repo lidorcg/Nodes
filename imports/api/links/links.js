@@ -13,14 +13,15 @@ const Link = Class.create({
     collection: Links,
     fields: {
         title: {
-            type: String
+            type: String,
+            default: "No title",
         },
         description: {
             type: String,
             default: "No description",
         },
         url: {
-            type: String
+            type: String,
         },
         types: {
             type: [String],
@@ -43,9 +44,9 @@ const Link = Class.create({
           return Type.find({
               _id: {
                   $in: this.types
-              }
+              },
           })
-        }
+        },
     },
     meteorMethods: {
         create() {

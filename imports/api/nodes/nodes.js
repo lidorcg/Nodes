@@ -71,16 +71,26 @@ const Node = Class.create({
         delete() {
             return this.remove();
         },
-        addTag(nodeId) {
-            this.tags.push(nodeId);
+        addTag(id) {
+            this.tags = [...this.tags, id];
             this.lastUpdated = new Date();
             return this.save();
         },
-        addLink(linkId) {
-            this.links.push(linkId);
+        removeTag(id) {
+            this.tags = this.tags.filter(i => i != id);
+            this.lastUpdated = new Date();
+            return this.save();
+        }
+        addLink(id) {
+            this.links = [...this.links, id];
             this.lastUpdated = new Date();
             return this.save();
         },
+        removeLink(id) {
+            this.links = this.links.filter(i => i != id);
+            this.lastUpdated = new Date();
+            return this.save();
+        }
     },
 });
 

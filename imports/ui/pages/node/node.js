@@ -26,8 +26,8 @@ Template.Node.helpers({
   allNodes() {
     return Node.find();
   },
-  allLinkTypes() {
-    return Type.find();
+  allLinks() {
+    return Link.find();
   },
 });
 
@@ -44,7 +44,7 @@ Template.Node.events({
   'blur .description-input' (event) {
     this.doneEditing();
   },
-  'submit .add-tag' (event, instance) {
+  'submit .js-add-tag' (event, instance) {
       event.preventDefault();
       const node = Node.findOne(instance.getNodeId());
       const form = event.target;
@@ -64,15 +64,13 @@ Template.Node.events({
 
       form.title.value = "";
   },
-  'submit .add-link' (event, instance) {
+  'submit .js-add-link' (event, instance) {
       console.log("adding new link");
       event.preventDefault();
       const node = Node.findOne(instance.getNodeId());
       const form = event.target;
 
       const newLink = {
-        title: form.title.value,
-        description: form.description.value,
         url: form.url.value.toLowerCase(),
       };
 
@@ -85,8 +83,6 @@ Template.Node.events({
         node.addLink(newLinkId);
       }
 
-      form.title.value = "";
       form.url.value = "";
-      form.description.value = "";
   },
 });
