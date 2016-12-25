@@ -30,7 +30,7 @@
           <li class=""><a href="/nodes/{{tag._id}}">{{tag.title}}</a></li>
         {{/each}}
       </ul>
-      <form class="js-add-tag form-inline">
+      <form class="js-toggle-tag form-inline">
         <input class="form-control input-sm" name="title" placeholder="Toggle tags" list="tags" autocomplete="off">
         <datalist id="tags">
           {{#each tag in allNodes}}
@@ -48,16 +48,7 @@
       <table class="links table table-hover ">
         <tbody>
           {{#each link in node.getLinks}}
-            <tr>
-              <td><a href="{{link.url}}">{{link.url}}</a></td>
-              {{# editable_td item=link name="type" value=""}}
-                {{> type_form}}
-              {{else}}
-                {{#each type in link.getTypes}}
-                  <span class="label label-primary pull-right" style="{margin-left:3px;}">{{type.title}}</span>
-                {{/each}}
-              {{/ editable_td}}
-            </tr>
+            {{> link_tr link=link remove=removeLink}}
           {{/each}}
         </tbody>
       </table>

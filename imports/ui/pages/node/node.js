@@ -6,6 +6,7 @@ import Link from '/imports/api/links/links.js';
 import Type from '/imports/api/types/types.js';
 
 import '../../components/editable/editable.js';
+import '../../components/link-tr/link-tr.js';
 
 import './node.html';
 
@@ -28,6 +29,13 @@ Template.Node.helpers({
   allLinks() {
     return Link.find();
   },
+  removeLink() {
+    const nodeId = Template.instance().getNodeId();
+    node = Node.findOne(nodeId);
+    return (id) => {
+      node.removeLink(id)
+    };
+  },
 });
 
 Template.Node.events({
@@ -43,7 +51,7 @@ Template.Node.events({
   'blur .description-input' (event) {
     this.doneEditing();
   },
-  'submit .js-add-tag' (event, instance) {
+  'submit .js-toggle-tag' (event, instance) {
       event.preventDefault();
       const node = Node.findOne(instance.getNodeId());
       const form = event.target;
@@ -66,14 +74,12 @@ Template.Node.events({
       if(isTagged) {
         node.removeTag(tagId);
       } else {
-        console.log("add tag");
         node.addTag(tagId);
       }
 
       form.title.value = "";
   },
   'submit .js-add-link' (event, instance) {
-      console.log("adding new link");
       event.preventDefault();
       const node = Node.findOne(instance.getNodeId());
       const form = event.target;
