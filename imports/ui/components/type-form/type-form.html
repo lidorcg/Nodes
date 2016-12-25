@@ -1,0 +1,10 @@
+<template name="type_form">
+  <form class="form-inline">
+    <input class="form-control input-sm" name="{{name}}" placeholder="{{name}}" list="types" autocomplete="off">
+    <datalist id="types">
+      {{#each type in allTypes}}
+        <option value="{{type.title}}"></option>
+      {{/each}}
+    </datalist>
+  </form>
+</template>

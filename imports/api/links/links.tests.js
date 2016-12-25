@@ -4,16 +4,17 @@
 
 import { Meteor } from 'meteor/meteor';
 import { assert } from 'meteor/practicalmeteor:chai';
-import { Links } from './links.js';
+import Link from './links.js';
 
 if (Meteor.isServer) {
   describe('links collection', function () {
     it('insert correctly', function () {
-      const linkId = Links.insert({
+      const newLink = new Link({
         title: 'meteor homepage',
         url: 'https://www.meteor.com',
       });
-      const added = Links.find({ _id: linkId });
+      newLink.save();
+      const added = Link.find({ _id: newLink._id });
       const collectionName = added._getCollectionName();
       const count = added.count();
 

@@ -1,0 +1,84 @@
+<template name="Links">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>Links</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-10">
+      <form class="js-new-item form-inline">
+        <input class="form-control input-sm" name="title" placeholder="title" autocomplete="off">
+        <input class="form-control input-sm" name="description" placeholder="description" autocomplete="off">
+        <input class="form-control input-sm" name="url" placeholder="url" autocomplete="off">
+        <button type="submit" class="btn btn-primary btn-sm">Add link</button>
+      </form>
+    </div>
+    {{#if hasSelected}}
+    <div class="col-lg-2 pull-right">
+      <form class="js-action form-inline">
+        <select class="form-control input-sm" name="action">
+          <option value="REMOVE">Remove</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+      </form>
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Url</th>
+            <th>Type</th>
+            <th class="col-lg-2">Created at</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each itm in allLinks}}
+            <tr>
+              <td>
+                {{> selectable onSelect=(onSelect itm)}}
+              </td>
+
+              {{# editable_td item=itm name="title" value=itm.title}}
+                {{> text_input}}
+              {{else}}
+                {{itm.title}}
+              {{/ editable_td}}
+
+              {{# editable_td item=itm name="description" value=itm.description}}
+                {{> text_input}}
+              {{else}}
+                {{itm.description}}
+              {{/ editable_td}}
+
+              {{# editable_td item=itm name="url" value=itm.url}}
+                {{> text_input}}
+              {{else}}
+                {{itm.url}}
+              {{/ editable_td}}
+
+              {{# editable_td item=itm name="type" value=""}}
+                {{> type_form}}
+              {{else}}
+                {{#each type in itm.getTypes}}
+                  <span class="label label-primary">{{type.title}}</span>
+                {{/each}}
+              {{/ editable_td}}
+
+              <td>{{itm.createdAt.toLocaleString}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
