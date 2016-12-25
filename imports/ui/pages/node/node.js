@@ -11,11 +11,15 @@ import '../../components/link-tr/link-tr.js';
 import './node.html';
 
 Template.Node.onCreated(function() {
+  // state from url
   this.getNodeId = () => FlowRouter.getParam('_id');
-  Meteor.subscribe('nodes.get', this.getNodeId());
-  Meteor.subscribe('nodes.all');
-  Meteor.subscribe('links.all');
-  Meteor.subscribe('types.all');
+  // subscriptions
+  this.autorun(() => {
+    Meteor.subscribe('nodes.get', this.getNodeId());
+    Meteor.subscribe('nodes.all');
+    Meteor.subscribe('links.all');
+    Meteor.subscribe('types.all');
+  })
 });
 
 Template.Node.helpers({
@@ -42,14 +46,8 @@ Template.Node.events({
   'dblclick .title' (event, instance) {
     this.editing();
   },
-  'blur .title-input' (event) {
-    this.doneEditing();
-  },
   'dblclick .description' (event, instance) {
     this.editing();
-  },
-  'blur .description-input' (event) {
-    this.doneEditing();
   },
   'submit .js-toggle-tag' (event, instance) {
       event.preventDefault();

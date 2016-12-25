@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import './selectable.html';
 
 Template.selectable.onCreated(function() {
+  // state
   this.state = new ReactiveDict();
   this.state.setDefault({
     selected: false,

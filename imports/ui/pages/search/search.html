@@ -1,0 +1,20 @@
+<template name="Search">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>Results:</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <ul class="pager">
+        {{#each node in results}}
+          <li class=""><a href="{{pathFor 'Node' _id=node._id}}">{{node.title}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+</template>

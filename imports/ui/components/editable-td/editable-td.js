@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import './editable-td.html';
 
 Template.editable_td.onCreated(function() {
+  // state
   this.state = new ReactiveDict();
   this.state.setDefault({
     editing: false,

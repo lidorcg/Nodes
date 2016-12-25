@@ -12,8 +12,10 @@ import './links.html';
 
 Template.Links.onCreated(function() {
   // subscriptions
-  Meteor.subscribe('links.all');
-  Meteor.subscribe('types.all');
+  this.autorun(() => {
+    Meteor.subscribe('links.all');
+    Meteor.subscribe('types.all');
+  })
   // state
   this.state = new ReactiveDict();
   this.state.setDefault({

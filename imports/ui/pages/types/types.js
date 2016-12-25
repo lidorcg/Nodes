@@ -9,7 +9,9 @@ import './types.html';
 
 Template.Types.onCreated(function() {
   // subscriptions
-  Meteor.subscribe('types.all');
+  this.autorun(() => {
+    Meteor.subscribe('types.all');
+  })
   // state
   this.state = new ReactiveDict();
   this.state.setDefault({

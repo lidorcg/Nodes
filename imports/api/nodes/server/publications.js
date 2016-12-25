@@ -7,6 +7,10 @@ Meteor.publish('nodes.all', function() {
     return Node.find();
 });
 
+Meteor.publish('nodes.search', function(query) {
+    return Node.find({$text: {$search: query}});
+});
+
 Meteor.publish('nodes.get', function(id) {
     return Node.find(id);
 });

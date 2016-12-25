@@ -11,11 +11,12 @@ const Node = Class.create({
     collection: Nodes,
     fields: {
         title: {
-            type: String
+            type: String,
+            index: 'text',
         },
         description: {
             type: String,
-            default: "No description"
+            default: "No description",
         },
         links: {
             type: [String], // TODO: check why Mongo.ObjectID doesn't work

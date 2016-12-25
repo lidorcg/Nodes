@@ -6,7 +6,9 @@ import './type-form.html';
 
 Template.type_form.onCreated(function() {
   // subscriptions
-  Meteor.subscribe('types.all');
+  this.autorun(() => {
+    Meteor.subscribe('types.all');
+  })
 });
 
 Template.type_form.helpers({

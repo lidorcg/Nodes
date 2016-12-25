@@ -4,6 +4,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 // Import needed templates
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
+import '../../ui/pages/search/search.js';
 import '../../ui/pages/node/node.js';
 import '../../ui/pages/nodes/nodes.js';
 import '../../ui/pages/links/links.js';
@@ -36,6 +37,13 @@ FlowRouter.route('/types', {
   name: 'Types',
   action() {
     BlazeLayout.render('Body', { main: 'Types' });
+  },
+});
+
+FlowRouter.route('/search/:query', {
+  name: 'Search',
+  action() {
+    BlazeLayout.render('Body', { main: 'Search' });
   },
 });
 

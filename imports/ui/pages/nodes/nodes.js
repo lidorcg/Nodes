@@ -8,7 +8,11 @@ import '../../components/text-input/text-input.js';
 import './nodes.html';
 
 Template.Nodes.onCreated(function() {
-  Meteor.subscribe('nodes.all');
+  // subscriptions
+  this.autorun(() => {
+    Meteor.subscribe('nodes.all');
+  })
+  // state
   this.state = new ReactiveDict();
   this.state.setDefault({
     selected: [],
