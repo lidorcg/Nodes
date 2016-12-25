@@ -8,7 +8,21 @@ Meteor.publish('nodes.all', function() {
 });
 
 Meteor.publish('nodes.search', function(query) {
-    return Node.find({$text: {$search: query}});
+    return Node.find({
+        $or: [
+            {
+                'title': {
+                    '$regex': query,
+                    $options: 'i'
+                }
+            }, {
+                'description': {
+                    '$regex': query,
+                    $options: 'i'
+                }
+            },
+        ]
+    });
 });
 
 Meteor.publish('nodes.get', function(id) {

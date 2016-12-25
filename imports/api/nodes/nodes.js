@@ -12,7 +12,6 @@ const Node = Class.create({
     fields: {
         title: {
             type: String,
-            index: 'text',
         },
         description: {
             type: String,
