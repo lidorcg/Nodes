@@ -12,6 +12,14 @@ import '../../ui/pages/types/types.js';
 import '../../ui/pages/not-found/not-found.js';
 
 // Set up all routes in the app
+
+FlowRouter.route('/', {
+  name: 'Home',
+  action() {
+    BlazeLayout.render('Body', { main: 'Home' });
+  },
+});
+
 FlowRouter.route('/nodes/:_id', {
   name: 'Node',
   action() {
@@ -47,12 +55,6 @@ FlowRouter.route('/search/:query', {
   },
 });
 
-FlowRouter.route('/', {
-  name: 'Home',
-  action() {
-    BlazeLayout.render('Body', { main: 'Home' });
-  },
-});
 
 FlowRouter.notFound = {
   action() {

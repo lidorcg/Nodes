@@ -15,10 +15,10 @@ Template.Node.onCreated(function() {
   this.getNodeId = () => FlowRouter.getParam('_id');
   // subscriptions
   this.autorun(() => {
-    Meteor.subscribe('nodes.get', this.getNodeId());
-    Meteor.subscribe('nodes.all');
-    Meteor.subscribe('links.all');
-    Meteor.subscribe('types.all');
+    this.subscribe('nodes.get', this.getNodeId());
+    this.subscribe('nodes.all');
+    this.subscribe('links.all');
+    this.subscribe('types.all');
   })
 });
 

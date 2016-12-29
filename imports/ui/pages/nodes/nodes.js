@@ -10,7 +10,7 @@ import './nodes.html';
 Template.Nodes.onCreated(function() {
   // subscriptions
   this.autorun(() => {
-    Meteor.subscribe('nodes.all');
+    this.subscribe('nodes.all');
   })
   // state
   this.state = new ReactiveDict();
