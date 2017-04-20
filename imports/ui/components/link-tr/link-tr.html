@@ -1,6 +1,6 @@
 <template name="link_tr">
   <tr>
-    <td><a target="_blank" href="{{link.url}}">{{link.url}}</a></td>
+    <td class="col-lg-5"><a target="_blank" href="{{link.url}}">{{link.url}}</a></td>
     {{# editable_td item=link name="type" value=""}}
       {{> type_form}}
     {{else}}
