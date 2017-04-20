@@ -33,12 +33,10 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
-            <th>Title</th>
-            <th>Description</th>
+            <th class="col-icon"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
             <th>Url</th>
-            <th>Type</th>
-            <th class="col-lg-2">Created at</th>
+            <th class="col-lg-4">Type</th>
+            <th class="col-lg-1">Created at</th>
           </tr>
         </thead>
         <tbody>
@@ -48,22 +46,10 @@
                 {{> selectable onSelect=(onSelect itm)}}
               </td>
 
-              {{# editable_td item=itm name="title" value=itm.title}}
-                {{> text_input}}
-              {{else}}
-                {{itm.title}}
-              {{/ editable_td}}
-
-              {{# editable_td item=itm name="description" value=itm.description}}
-                {{> text_input}}
-              {{else}}
-                {{itm.description}}
-              {{/ editable_td}}
-
               {{# editable_td item=itm name="url" value=itm.url}}
                 {{> text_input}}
               {{else}}
-                {{itm.url}}
+                <div class="hide-text-overflow">{{itm.url}}</div>
               {{/ editable_td}}
 
               {{# editable_td item=itm name="type" value=""}}
@@ -74,7 +60,7 @@
                 {{/each}}
               {{/ editable_td}}
 
-              <td>{{itm.createdAt.toLocaleString}}</td>
+              <td>{{itm.createdAt.toLocaleDateString}}</td>
             </tr>
           {{/each}}
         </tbody>

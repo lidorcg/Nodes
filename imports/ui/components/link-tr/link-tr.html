@@ -1,6 +1,6 @@
 <template name="link_tr">
   <tr>
-    <td class="col-lg-5"><a target="_blank" href="{{link.url}}">{{link.url}}</a></td>
+    <td class="col-lg-7"><a target="_blank" href="{{link.url}}">{{link.url}}</a></td>
     {{# editable_td item=link name="type" value=""}}
       {{> type_form}}
     {{else}}
@@ -8,6 +8,6 @@
         <span class="label label-primary pull-right" style="{margin-left:3px;}">{{type.title}}</span>
       {{/each}}
     {{/ editable_td}}
-    <td><span class="js-remove glyphicon glyphicon-remove clickable text-danger pull-right" aria-hidden="true"></span></td>
+    <td class="col-icon"><span class="js-remove glyphicon glyphicon-remove clickable text-danger pull-right" aria-hidden="true"></span></td>
   </tr>
 </template>

@@ -32,11 +32,11 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
-            <th>Title</th>
+            <th class="col-icon"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></th>
+            <th class="col-1-5">Title</th>
             <th>Description</th>
-            <th class="col-lg-2">Created at</th>
-            <th><span class="glyphicon glyphicon-link" aria-hidden="true"></span></th>
+            <th class="col-lg-1">Created at</th>
+            <th class="col-icon"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></th>
           </tr>
         </thead>
         <tbody>
@@ -55,10 +55,10 @@
               {{# editable_td item=itm name="description" value=itm.description}}
                 {{> text_input}}
               {{else}}
-                {{itm.description}}
+                <div class="hide-text-overflow">{{itm.description}}</div>
               {{/ editable_td}}
 
-              <td>{{itm.createdAt.toLocaleString}}</td>
+              <td>{{itm.createdAt.toLocaleDateString}}</td>
 
               <td>
                 <a href="{{pathFor 'Node' _id=itm._id}}">
