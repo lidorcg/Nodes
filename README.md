@@ -26,7 +26,7 @@ This platform aims to offer a different studying and learning mechanism.
 - title
 - tags
 
-## Tag
+## Type
 
 - title
 - link
